@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { store } from '../components/Store/Store';
 import PhoneApp from '../components/PhoneApp/PhoneApp';
 import Navigation from '../components/Navigation/Navigation';
@@ -23,10 +23,9 @@ export const App = () => {
         >
           <Navigation />
           <Routes>
-            <Route path="/register" element={<Register />} />
+            <Route path="/public" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <PrivateRoute path="/contacts" element={<PhoneApp />} />
-            <Route path="*" element={<NotFoundRedirect />} />
+            <PrivateRoute path="/protected" element={<PhoneApp />} />
           </Routes>
         </div>
       </Router>
@@ -37,21 +36,22 @@ export const App = () => {
 const PrivateRoute = ({ element: Component, ...rest }) => {
   const isAuthenticated = !!localStorage.getItem('userToken');
   const navigate = useNavigate();
+
   React.useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
     }
   }, [isAuthenticated, navigate]);
 
-  return isAuthenticated ? <Route {...rest} element={Component} /> : null;
+  return (
+    <Route
+      {...rest}
+      element={isAuthenticated ? Component : <Navigate to="/login" />}
+    />
+  );
 };
 
 
-const NotFoundRedirect = () => {
-  const navigate = useNavigate();
-  React.useEffect(() => {
-    navigate("/login");
-  }, [navigate]);
 
-  return null;
-};
+
+

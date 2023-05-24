@@ -11,7 +11,7 @@ const initialState = {
 
 // Fetch contacts from API
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
-  const response = await fetch('https://646796f0e99f0ba0a812b3b3.mockapi.io/contacts');
+  const response = await fetch('https://connections-api.herokuapp.com/docs/#/contacts');
   if (response.ok) {
     return await response.json();
   } else {
@@ -20,9 +20,9 @@ export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
 });
 
 // Add a new contact
-export const addContact = createAsyncThunk('contacts/addContact', async ({ name, number }) => {
-  const newContact = { id: nanoid(), name, number };
-  const response = await fetch('https://646796f0e99f0ba0a812b3b3.mockapi.io/contacts', {
+export const addContact = createAsyncThunk('contacts/addContact', async ({ name, phone }) => {
+  const newContact = { id: nanoid(), name, phone };
+  const response = await fetch('https://connections-api.herokuapp.com/docs/#/contacts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const addContact = createAsyncThunk('contacts/addContact', async ({ name,
 
 // Delete a contact
 export const deleteContact = createAsyncThunk('contacts/deleteContact', async (id) => {
-  const response = await fetch(`https://646796f0e99f0ba0a812b3b3.mockapi.io/contacts/${id}`, {
+  const response = await fetch(`https://connections-api.herokuapp.com/docs/#/contacts/${id}`, {
     method: 'DELETE',
   });
   if (response.ok) {
