@@ -1,0 +1,23 @@
+.contactTitle{
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 0;
+    text-align: center;
+}
+.contactInfo{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 0;
+    text-align: center;
+    list-style: none;
+}
+.deleteButton{
+    margin-left: 10px;
+    box-shadow: black 5px -5px 5px;
+}
+.deleteButton:hover{
+    background-color: #f32323;
+    cursor: pointer;
+}

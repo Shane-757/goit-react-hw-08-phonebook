@@ -1,0 +1,30 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.addButton{
+    margin-top: 20px;
+    box-shadow: black 5px -5px 5px;
+}
+.addButton:hover{
+    background-color: #2f8e2f;
+    cursor: pointer;
+}
+
+.formName{
+    font-size: 25px;
+    margin: 0;
+}
+
+.formNumber{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
