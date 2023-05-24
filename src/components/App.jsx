@@ -1,22 +1,41 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../components/Store/Store';
-import PhoneApp from './PhoneApp/PhoneApp';
+import { createStore } from 'redux';
 
-export const App = () => {
-  return (
-    <Provider store={store}>
-        <div
-          style={{
-            height: '100vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontSize: 40,
-            color: '#010101',
-          }}
-        >
-          <PhoneApp />
-        </div>
-    </Provider>
-  );
+// Define a simple reducer
+const reducer = (state = {}, action) => {
+  switch (action.type) {
+    // Define actions here
+    default:
+      return state;
+  }
 };
+
+// Create the Redux store
+const store = createStore(reducer);
+
+// Define the Registration component
+const Registration = () => <h1>Registration</h1>;
+
+// Define the Login component
+const Login = () => <h1>Login</h1>;
+
+// Define the PhoneApp component
+const PhoneApp = () => <h1>Phone App</h1>;
+
+// Define the App component
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/phone-app" element={<PhoneApp />} />
+        {/* Add more routes as needed */}
+      </Routes>
+    </Router>
+  </Provider>
+);
+
+export default App;
