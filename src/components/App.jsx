@@ -1,41 +1,57 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { store } from '../components/Store/Store';
+import PhoneApp from '../components/PhoneApp/PhoneApp';
+import Navigation from '../components/Navigation/Navigation';
+import Register from '../components/Register/Register';
+import Login from '../components/Login/Login';
 
-// Define a simple reducer
-const reducer = (state = {}, action) => {
-  switch (action.type) {
-    // Define actions here
-    default:
-      return state;
-  }
+export const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <div
+          style={{
+            height: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: 40,
+            color: '#010101',
+          }}
+        >
+          <Navigation />
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <PrivateRoute path="/contacts" element={<PhoneApp />} />
+            <Route path="*" element={<NotFoundRedirect />} />
+          </Routes>
+        </div>
+      </Router>
+    </Provider>
+  );
 };
 
-// Create the Redux store
-const store = createStore(reducer);
+const PrivateRoute = ({ element: Component, ...rest }) => {
+  const isAuthenticated = !!localStorage.getItem('userToken');
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
 
-// Define the Registration component
-const Registration = () => <h1>Registration</h1>;
+  return isAuthenticated ? <Route {...rest} element={Component} /> : null;
+};
 
-// Define the Login component
-const Login = () => <h1>Login</h1>;
 
-// Define the PhoneApp component
-const PhoneApp = () => <h1>Phone App</h1>;
+const NotFoundRedirect = () => {
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    navigate("/login");
+  }, [navigate]);
 
-// Define the App component
-const App = () => (
-  <Provider store={store}>
-    <Router>
-      <Routes>
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/phone-app" element={<PhoneApp />} />
-        {/* Add more routes as needed */}
-      </Routes>
-    </Router>
-  </Provider>
-);
-
-export default App;
+  return null;
+};

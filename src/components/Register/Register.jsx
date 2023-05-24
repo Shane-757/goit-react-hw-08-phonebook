@@ -2,37 +2,37 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://connections-api.herokuapp.com/api/auth/login', {
+      await axios.post('https://connections-api.herokuapp.com/api/users', {
+        name,
         email,
         password,
       });
 
-      // Store the user token somewhere (local storage, cookies, app state, etc.)
-      localStorage.setItem('userToken', response.data.token);
-
-      // After successful login, redirect user to the home page.
-      navigate('/contacts');
+      // After successful registration, redirect user to the login page.
+      navigate('/login');
     } catch (error) {
-      // Handle login errors here...
+      // Handle registration errors here...
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleRegister}>
+      <input type="text" value={name} onChange={e => setName(e.target.value)} required />
       <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
       <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </form>
   );
 }
 
-export default Login;
+export default Register;
