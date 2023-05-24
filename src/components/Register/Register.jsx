@@ -21,7 +21,7 @@ function Register() {
       // After successful registration, redirect user to the login page.
       navigate('/login');
     } catch (error) {
-      // Handle registration errors here...
+      console.error("Registration error: ", error);
     }
   };
 

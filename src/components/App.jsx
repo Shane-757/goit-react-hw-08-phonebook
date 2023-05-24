@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { store } from '../components/Store/Store';
 import PhoneApp from '../components/PhoneApp/PhoneApp';
 import Navigation from '../components/Navigation/Navigation';
@@ -23,9 +23,9 @@ export const App = () => {
         >
           <Navigation />
           <Routes>
-            <Route path="/public" element={<Register />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <PrivateRoute path="/protected" element={<PhoneApp />} />
+            <Route path="/protected" element={<PrivateRoute><PhoneApp /></PrivateRoute>} />
           </Routes>
         </div>
       </Router>
@@ -33,7 +33,7 @@ export const App = () => {
   );
 };
 
-const PrivateRoute = ({ element: Component, ...rest }) => {
+const PrivateRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem('userToken');
   const navigate = useNavigate();
 
@@ -43,12 +43,7 @@ const PrivateRoute = ({ element: Component, ...rest }) => {
     }
   }, [isAuthenticated, navigate]);
 
-  return (
-    <Route
-      {...rest}
-      element={isAuthenticated ? Component : <Navigate to="/login" />}
-    />
-  );
+  return isAuthenticated ? children : null;
 };
 
 
