@@ -12,7 +12,7 @@ function Register() {
     event.preventDefault();
 
     try {
-      await axios.post('https://connections-api.herokuapp.com/api/users', {
+      await axios.post('https://connections-api.herokuapp.com/users/signup', {
         name,
         email,
         password,
@@ -27,9 +27,9 @@ function Register() {
 
   return (
     <form onSubmit={handleRegister}>
-      <input type="text" value={name} onChange={e => setName(e.target.value)} required />
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+      <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required />
+      <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
+      <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
       <button type="submit">Register</button>
     </form>
   );

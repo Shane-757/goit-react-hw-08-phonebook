@@ -11,7 +11,7 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://connections-api.herokuapp.com/api/auth/login', {
+      const response = await axios.post('https://connections-api.herokuapp.com/users/login', {
         email,
         password,
       });
@@ -28,8 +28,8 @@ function Login() {
 
   return (
     <form onSubmit={handleLogin}>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+      <input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required />
+      <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} required />
       <button type="submit">Login</button>
     </form>
   );
