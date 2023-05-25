@@ -4,6 +4,12 @@
   "private": true,
   "homepage": "https://Shane-757.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.1",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.2",
+    "@mui/styled-engine-sc": "^5.12.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -16,6 +22,7 @@
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.10",
     "web-vitals": "^2.1.3"
   },
   "scripts": {
