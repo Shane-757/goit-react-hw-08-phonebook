@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
+
 
 const initialState = {
   contacts: [],
@@ -11,7 +11,7 @@ const initialState = {
 
 // Fetch contacts from API
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
-  const response = await fetch('https://connections-api.herokuapp.com/docs/#/contacts');
+  const response = await fetch('https://connections-api.herokuapp.com/contacts');
   if (response.ok) {
     return await response.json();
   } else {
@@ -20,12 +20,17 @@ export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
 });
 
 // Add a new contact
-export const addContact = createAsyncThunk('contacts/addContact', async ({ name, phone }) => {
-  const newContact = { id: nanoid(), name, phone };
-  const response = await fetch('https://connections-api.herokuapp.com/docs/#/contacts', {
+export const addContact = createAsyncThunk('contacts/addContact', async ({ name, number }) => {
+  const newContact = {
+    "name": name,
+    "number": number
+  };
+  const userToken = localStorage.getItem('userToken');  // get user token
+  const response = await fetch('https://connections-api.herokuapp.com/contacts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${userToken}`,  // Add Authorization header
     },
     body: JSON.stringify(newContact),
   });

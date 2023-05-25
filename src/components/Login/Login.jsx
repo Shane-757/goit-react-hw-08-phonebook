@@ -21,6 +21,7 @@ function Login() {
 
       // After successful login, redirect user to the home page.
       navigate('/contacts');
+      localStorage.setItem('userEmail', email);
     } catch (error) {
       // Handle login errors here...
     }

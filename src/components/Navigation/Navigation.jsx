@@ -1,10 +1,12 @@
 
 import React from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
+import UserMenu from '../UserMenu/UserMenu';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
   const location = useLocation();
+  const isAuthenticated = !!localStorage.getItem('userToken');
   
   return (
     <nav>
@@ -17,6 +19,7 @@ const Navigation = () => {
       <NavLink to="/contacts" className={location.pathname === "/contacts" ? styles.activeLink : styles.link}>
         Contacts
       </NavLink>
+      {isAuthenticated && <UserMenu />}  {/* Display UserMenu only if user is authenticated */}
     </nav>
   );
 };
