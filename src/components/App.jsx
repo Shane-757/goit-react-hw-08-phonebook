@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../components/Store/Store'; 
@@ -12,25 +13,18 @@ export const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>  
-        <Router>
-          <div
-            style={{
-              height: '100vh',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: 40,
-              color: '#010101',
-            }}
-          >
-            <Navigation />
-            <Routes>
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/contacts" element={<PrivateRoute><PhoneApp /></PrivateRoute>} />
-            </Routes>
-          </div>
-        </Router>
+        <ChakraProvider>
+          <Router>
+            <div>
+              <Navigation />
+              <Routes>
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/contacts" element={<PrivateRoute><PhoneApp /></PrivateRoute>} />
+              </Routes>
+            </div>
+          </Router>
+        </ChakraProvider>
       </PersistGate>  
     </Provider>
   );
@@ -48,7 +42,6 @@ const PrivateRoute = ({ children }) => {
 
   return isAuthenticated ? children : null;
 };
-
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter, changeSort } from '../PhonebookSlice/PhonebookSlice';
-import styles from './Filter.module.css';
+import { Box, Heading, Input, Select } from '@chakra-ui/react';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -18,20 +18,20 @@ const Filter = () => {
   };
 
   return (
-    <>
-      <h2 className={styles.filterTitle}>Search</h2>
-      <input
-        className={styles.filterInput}
+    <Box>
+      <Heading as="h2" size="md" mb={4}>Search</Heading>
+      <Input
         type="text"
         name="filter"
         value={filter}
         onChange={handleFilterChange}
+        mb={4}
       />
-      <select className={styles.filterInput} value={sort} onChange={handleSortChange}>
+      <Select value={sort} onChange={handleSortChange}>
         <option value="asc">Alphabetical</option>
         <option value="desc">Reverse Alphabetical</option>
-      </select>
-    </>
+      </Select>
+    </Box>
   );
 };
 

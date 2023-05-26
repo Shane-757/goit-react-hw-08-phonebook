@@ -1,26 +1,26 @@
-
 import React from 'react';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import UserMenu from '../UserMenu/UserMenu';
-import styles from './Navigation.module.css';
+import { Box } from '@chakra-ui/react';
+import NavLink from '../NavLink/NavLink'; 
 
 const Navigation = () => {
   const location = useLocation();
   const isAuthenticated = !!localStorage.getItem('userToken');
   
   return (
-    <nav>
-      <NavLink to="/register" className={location.pathname === "/register" ? styles.activeLink : styles.link}>
+    <Box as="nav">
+      <NavLink to="/register" isActive={location.pathname === "/register"}>
         Register
       </NavLink>
-      <NavLink to="/login" className={location.pathname === "/login" ? styles.activeLink : styles.link}>
+      <NavLink to="/login" isActive={location.pathname === "/login"}>
         Login
       </NavLink>
-      <NavLink to="/contacts" className={location.pathname === "/contacts" ? styles.activeLink : styles.link}>
+      <NavLink to="/contacts" isActive={location.pathname === "/contacts"}>
         Contacts
       </NavLink>
-      {isAuthenticated && <UserMenu />}  {/* Display UserMenu only if user is authenticated */}
-    </nav>
+      {isAuthenticated && <UserMenu />}  
+    </Box>
   );
 };
 

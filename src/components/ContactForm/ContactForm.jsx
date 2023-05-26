@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from '../PhonebookSlice/PhonebookSlice';
-import styles from './ContactForm.module.css';
-
+import { Box, Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.phonebook.contacts); // <-- Moved here
+  const contacts = useSelector((state) => state.phonebook.contacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -35,34 +34,36 @@ const ContactForm = () => {
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.formContainer}>
-        <h2 className={styles.formName}>Name</h2>
-        <input
+    return (
+    <Box as="form" onSubmit={handleSubmit} width="300px" margin="auto">
+      <Heading as="h2" size="md" mb={4}>Name</Heading>
+      <FormControl id="name" isRequired>
+        <FormLabel>Name</FormLabel>
+        <Input 
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          pattern="^[a-zA-Za-яА-Я]+(([' -][a-zA-Za-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan."
-          required
           value={name}
-          onChange={handleInputChange}
+          onChange={handleInputChange} 
         />
-        <h2 className={styles.formNumber}>Phone Number</h2>
-        <input
+      </FormControl>
+
+      <Heading as="h2" size="md" mt={4} mb={4}>Phone Number</Heading>
+      <FormControl id="number" isRequired>
+        <FormLabel>Phone Number</FormLabel>
+        <Input 
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
           value={number}
           onChange={handleInputChange}
         />
-        <button className={styles.addButton} type="submit">
-          Add Contact
-        </button>
-      </div>
-    </form>
+      </FormControl>
+
+      <Button mt={4} colorScheme="teal" type="submit">Add Contact</Button>
+    </Box>
   );
 };
 

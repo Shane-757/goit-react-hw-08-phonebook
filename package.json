@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://Shane-757.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.1",
@@ -15,6 +16,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
+    "framer-motion": "^10.12.16",
     "nanoid": "^4.0.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
