@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Flex } from '@chakra-ui/react';
 
 function Register() {
   const navigate = useNavigate();
@@ -42,8 +42,9 @@ function Register() {
         <FormLabel>Password</FormLabel>
         <Input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
       </FormControl>
-
-      <Button mt={4} colorScheme="teal" type="submit">Register</Button>
+     <Flex alignItems="center" justifyContent="center" mt={4}> 
+        <Button colorScheme="teal" type="submit">Register</Button>
+        </Flex>
     </Box>
   );
 }

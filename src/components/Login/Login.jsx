@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Input, Button } from '@chakra-ui/react';
+import { Box, Input, Button, Container, Flex } from '@chakra-ui/react'; // import Container
 
 function Login() {
   const navigate = useNavigate();
@@ -25,12 +25,16 @@ function Login() {
     }
   };
 
-  return (
-    <Box as="form" onSubmit={handleLogin}>
-      <Input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required />
-      <Input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} required />
-      <Button type="submit">Login</Button>
-    </Box>
+return (
+    <Container maxW="container.md" width="300px" margin="auto"> 
+      <Box as="form" onSubmit={handleLogin}>
+        <Input maxW="400px" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required />
+        <Input maxW="400px" type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} required mt={4} />
+        <Flex alignItems="center" justifyContent="center" mt={4}> 
+          <Button colorScheme="teal" type="submit">Login</Button>
+        </Flex>
+      </Box>
+    </Container>
   );
 }
 

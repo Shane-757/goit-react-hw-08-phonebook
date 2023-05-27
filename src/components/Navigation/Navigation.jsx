@@ -13,9 +13,11 @@ const Navigation = () => {
       <NavLink to="/register" isActive={location.pathname === "/register"}>
         Register
       </NavLink>
+      <Box width="10px" mt={4} />
       <NavLink to="/login" isActive={location.pathname === "/login"}>
         Login
       </NavLink>
+      <Box width="10px" my={4} />
       <NavLink to="/contacts" isActive={location.pathname === "/contacts"}>
         Contacts
       </NavLink>
