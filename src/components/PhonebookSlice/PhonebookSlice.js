@@ -11,7 +11,12 @@ const initialState = {
 
 // Fetch contacts from API
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
-  const response = await fetch('https://connections-api.herokuapp.com/contacts');
+  const userToken = localStorage.getItem('userToken');  // get user token
+  const response = await fetch('https://connections-api.herokuapp.com/contacts', {
+    headers: {
+      'Authorization': `Bearer ${userToken}`,  // Add Authorization header
+    },
+  });
   if (response.ok) {
     return await response.json();
   } else {

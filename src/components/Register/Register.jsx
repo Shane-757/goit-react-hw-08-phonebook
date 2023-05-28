@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Button, FormControl, FormLabel, Input, Flex } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Flex, Alert } from '@chakra-ui/react';
 
 function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // Add error state
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -22,12 +23,18 @@ function Register() {
       // After successful registration, redirect user to the login page.
       navigate('/login');
     } catch (error) {
-      console.error("Registration error: ", error);
+      // Handle registration errors here...
+      if (error.response && error.response.status === 400) {
+        setError("This user has already registered."); // Set error state
+      } else {
+        console.error("Registration error: ", error);
+      }
     }
   };
 
   return (
     <Box as="form" onSubmit={handleRegister} width="300px" margin="auto">
+      {error && <Alert status="error">{error}</Alert>} {/* Display error message */}
       <FormControl id="name" isRequired>
         <FormLabel>Name</FormLabel>
         <Input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />

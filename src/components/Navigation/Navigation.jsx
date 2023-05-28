@@ -4,21 +4,21 @@ import UserMenu from '../UserMenu/UserMenu';
 import { Box } from '@chakra-ui/react';
 import NavLink from '../NavLink/NavLink'; 
 
-const Navigation = () => {
+  const Navigation = () => {
   const location = useLocation();
   const isAuthenticated = !!localStorage.getItem('userToken');
   
   return (
     <Box as="nav">
-      <NavLink to="/register" isActive={location.pathname === "/register"} fontSize="lg">
+      <NavLink to="/register" fontSize="lg">
         Register
       </NavLink>
       <Box width="10px" mt={4} />
-      <NavLink to="/login" isActive={location.pathname === "/login"} fontSize="lg">
+      <NavLink to="/login" fontSize="lg">
         Login
       </NavLink>
       <Box width="10px" my={4} />
-      <NavLink to="/contacts" isActive={location.pathname === "/contacts"} fontSize="lg">
+      <NavLink to="/contacts" fontSize="lg">
         Contacts
       </NavLink>
       {isAuthenticated && <UserMenu />}  
