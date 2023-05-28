@@ -4,7 +4,7 @@ import { fetchContacts } from '../PhonebookSlice/PhonebookSlice';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Center } from '@chakra-ui/react';
 
 const PhoneApp = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,9 @@ const PhoneApp = () => {
 
   return (
     <Box className="PhoneApp">
-      <Heading as="h1" size="lg">Phone Book</Heading>
+      <Center>
+        <Heading as="h1" size="lg">Phone Book</Heading>
+      </Center>
       <ContactForm />
       <Filter />
       <ContactList />

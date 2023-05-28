@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../PhonebookSlice/PhonebookSlice';
-import { Box, Button, UnorderedList, ListItem, Heading } from '@chakra-ui/react';
+import { Box, Button, UnorderedList, ListItem, Heading, Center } from '@chakra-ui/react';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -22,14 +22,18 @@ const ContactList = () => {
 
   return (
     <Box>
+      <Center>
       {filteredContacts.length > 0 && (
-        <Heading as="h2" size="md" mb={4}>Contacts</Heading>
-      )}
+        <Heading as="h2" size="md" my={4}>Contacts</Heading>
+        )}
+        </Center>
+      <Center>
       <UnorderedList>
         {filteredContacts.map((contact) => (
           <ListItem key={contact.id}>
             {contact.name}: {contact.number}
             <Button 
+              ml={4}
               colorScheme="red" 
               size="xs" 
               onClick={() => dispatch(deleteContact(contact.id))}
@@ -38,7 +42,8 @@ const ContactList = () => {
             </Button>
           </ListItem>
         ))}
-      </UnorderedList>
+        </UnorderedList>
+        </Center>
     </Box>
   );
 };

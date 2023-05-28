@@ -10,15 +10,15 @@ const Navigation = () => {
   
   return (
     <Box as="nav">
-      <NavLink to="/register" isActive={location.pathname === "/register"}>
+      <NavLink to="/register" isActive={location.pathname === "/register"} fontSize="lg">
         Register
       </NavLink>
       <Box width="10px" mt={4} />
-      <NavLink to="/login" isActive={location.pathname === "/login"}>
+      <NavLink to="/login" isActive={location.pathname === "/login"} fontSize="lg">
         Login
       </NavLink>
       <Box width="10px" my={4} />
-      <NavLink to="/contacts" isActive={location.pathname === "/contacts"}>
+      <NavLink to="/contacts" isActive={location.pathname === "/contacts"} fontSize="lg">
         Contacts
       </NavLink>
       {isAuthenticated && <UserMenu />}  
