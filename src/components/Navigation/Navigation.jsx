@@ -13,11 +13,11 @@ import NavLink from '../NavLink/NavLink';
       <NavLink to="/register" fontSize="lg">
         Register
       </NavLink>
-      <Box width="10px" mt={4} />
+      <Box width="10px" mt={5} />
       <NavLink to="/login" fontSize="lg">
         Login
       </NavLink>
-      <Box width="10px" my={4} />
+      <Box width="10px" my={5} />
       <NavLink to="/contacts" fontSize="lg">
         Contacts
       </NavLink>
