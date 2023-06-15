@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from '../components/Store/Store'; 
-import PhoneApp from '../components/PhoneApp/PhoneApp';
-import Navigation from '../components/Navigation/Navigation';
-import Register from '../components/Register/Register';
-import Login from '../components/Login/Login';
+import { store, persistor } from './Redux/Store/Store'; 
+import PhoneApp from './Pages/PhoneApp/PhoneApp';
+import Navigation from './components/Navigation/Navigation';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
 
 export const App = () => {
   return (

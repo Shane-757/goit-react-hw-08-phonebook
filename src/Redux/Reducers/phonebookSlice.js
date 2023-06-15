@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchContacts, addContact, deleteContact, updateContact } from "Redux/Actions/phonebookActions";
 
 const initialState = {
   contacts: [],
@@ -8,55 +8,6 @@ const initialState = {
   status: 'idle',  
   error: null,  
 };
-
-// Fetch contacts from API
-export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
-  const userToken = localStorage.getItem('userToken');  
-  const response = await fetch('https://connections-api.herokuapp.com/contacts', {
-    headers: {
-      'Authorization': `Bearer ${userToken}`,  
-    },
-  });
-  if (response.ok) {
-    return await response.json();
-  } else {
-    throw new Error('Failed to fetch contacts');
-  }
-});
-
-// Add a new contact
-export const addContact = createAsyncThunk('contacts/addContact', async ({ name, number }) => {
-  const newContact = {
-    "name": name,
-    "number": number
-  };
-  const userToken = localStorage.getItem('userToken');  
-  const response = await fetch('https://connections-api.herokuapp.com/contacts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${userToken}`,  
-    },
-    body: JSON.stringify(newContact),
-  });
-  if (response.ok) {
-    return await response.json();
-  } else {
-    throw new Error('Failed to add contact');
-  }
-});
-
-// Delete a contact
-export const deleteContact = createAsyncThunk('contacts/deleteContact', async (id) => {
-  const response = await fetch(`https://connections-api.herokuapp.com/docs/#/contacts/${id}`, {
-    method: 'DELETE',
-  });
-  if (response.ok) {
-    return id;
-  } else {
-    throw new Error('Failed to delete contact');
-  }
-});
 
 const phonebookSlice = createSlice({
   name: 'phonebook',
@@ -101,6 +52,18 @@ const phonebookSlice = createSlice({
         state.contacts = state.contacts.filter(contact => contact.id !== action.payload);
       })
       .addCase(deleteContact.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(updateContact.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateContact.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        const index = state.contacts.findIndex(contact => contact.id === action.payload.id);
+        state.contacts[index] = action.payload;
+      })
+      .addCase(updateContact.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

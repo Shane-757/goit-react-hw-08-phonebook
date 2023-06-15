@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from '../PhonebookSlice/PhonebookSlice';
+import { addContact } from "Redux/Actions/phonebookActions";
 import { Box, Button, FormControl, FormLabel, Input, Center, useToast } from '@chakra-ui/react';
 
 const ContactForm = () => {

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchContacts } from '../PhonebookSlice/PhonebookSlice';
-import ContactForm from '../ContactForm/ContactForm';
-import ContactList from '../ContactList/ContactList';
-import Filter from '../Filter/Filter';
+import { fetchContacts } from "Redux/Actions/phonebookActions";
+import ContactForm from '../../components/ContactForm/ContactForm';
+import ContactList from '../../components/ContactList/ContactList';
+import Filter from '../../components/Filter/Filter';
 import { Box, Heading, Center } from '@chakra-ui/react';
 
 const PhoneApp = () => {

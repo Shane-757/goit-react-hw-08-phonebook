@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter, changeSort } from '../PhonebookSlice/PhonebookSlice';
+import { changeFilter, changeSort } from "Redux/Reducers/phonebookSlice";
 import { Box, Heading, Input, Select, Container, Center } from '@chakra-ui/react';
 
 const Filter = () => {
