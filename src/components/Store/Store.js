@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import phonebookReducer from '../PhonebookSlice/PhonebookSlice';
 

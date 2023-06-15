@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Input, Button, Container, Flex, Alert } from '@chakra-ui/react'; // import Alert
+import { Box, Input, Button, Container, Flex, Alert } from '@chakra-ui/react'; 
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // add error state
+  const [error, setError] = useState(""); 
 
  const handleLogin = async (event) => {
   event.preventDefault();
@@ -19,7 +19,7 @@ function Login() {
     });
 
     localStorage.setItem('userToken', response.data.token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`; // Set token in axios headers
+    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`; 
     navigate('/contacts');
     localStorage.setItem('userEmail', email);
   } catch (error) {
@@ -33,7 +33,7 @@ function Login() {
 return (
     <Container maxW="container.md" width="300px" margin="auto"> 
       <Box as="form" onSubmit={handleLogin}>
-        {error && <Alert status="error">{error}</Alert>} {/* Display error message */}
+        {error && <Alert status="error">{error}</Alert>} 
         <Input maxW="400px" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required />
         <Input maxW="400px" type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} required mt={4} />
         <Flex alignItems="center" justifyContent="center" mt={4}> 

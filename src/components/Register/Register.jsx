@@ -8,7 +8,7 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Add error state
+  const [error, setError] = useState(""); 
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -23,9 +23,9 @@ function Register() {
       // After successful registration, redirect user to the login page.
       navigate('/login');
     } catch (error) {
-      // Handle registration errors here...
+     
       if (error.response && error.response.status === 400) {
-        setError("This user has already registered."); // Set error state
+        setError("This user has already registered."); 
       } else {
         console.error("Registration error: ", error);
       }
@@ -34,7 +34,7 @@ function Register() {
 
   return (
     <Box as="form" onSubmit={handleRegister} width="300px" margin="auto">
-      {error && <Alert status="error">{error}</Alert>} {/* Display error message */}
+      {error && <Alert status="error">{error}</Alert>} 
       <FormControl id="name" isRequired>
         <FormLabel>Name</FormLabel>
         <Input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />

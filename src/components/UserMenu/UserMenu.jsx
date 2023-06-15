@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Text, Flex, Center } from '@chakra-ui/react';
 
 const UserMenu = () => {
-  const userEmail = localStorage.getItem('userEmail'); // Assuming userEmail is stored in local storage
+  const userEmail = localStorage.getItem('userEmail'); 
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('userToken');
-    localStorage.removeItem('userEmail');  // Clear email on logout too
+    localStorage.removeItem('userEmail');  
     navigate('/login');
   };
 

@@ -5,16 +5,16 @@ const initialState = {
   contacts: [],
   filter: '',
   sort: '',
-  status: 'idle',  // to represent the loading status
-  error: null,  // to store any error message
+  status: 'idle',  
+  error: null,  
 };
 
 // Fetch contacts from API
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
-  const userToken = localStorage.getItem('userToken');  // get user token
+  const userToken = localStorage.getItem('userToken');  
   const response = await fetch('https://connections-api.herokuapp.com/contacts', {
     headers: {
-      'Authorization': `Bearer ${userToken}`,  // Add Authorization header
+      'Authorization': `Bearer ${userToken}`,  
     },
   });
   if (response.ok) {
@@ -30,12 +30,12 @@ export const addContact = createAsyncThunk('contacts/addContact', async ({ name,
     "name": name,
     "number": number
   };
-  const userToken = localStorage.getItem('userToken');  // get user token
+  const userToken = localStorage.getItem('userToken');  
   const response = await fetch('https://connections-api.herokuapp.com/contacts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${userToken}`,  // Add Authorization header
+      'Authorization': `Bearer ${userToken}`,  
     },
     body: JSON.stringify(newContact),
   });
