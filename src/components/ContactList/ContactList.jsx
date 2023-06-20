@@ -13,32 +13,26 @@ const ContactList = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
 
- let filteredContacts = contacts.filter((contact) =>
-  (contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())) ||
-  (contact.number && contact.number.includes(filter))
+  let filteredContacts = contacts.filter((contact) =>
+    (contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())) ||
+    (contact.number && contact.number.includes(filter))
   );
   
   switch (sort) {
-  case 'ascFirstName':
-    filteredContacts = filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
-    break;
-  case 'descFirstName':
-    filteredContacts = filteredContacts.sort((a, b) => b.name.localeCompare(a.name));
-    break;
-  case 'ascLastName':
-    filteredContacts = filteredContacts.sort((a, b) => a.name.split(' ').slice(-1)[0].localeCompare(b.name.split(' ').slice(-1)[0]));
-    break;
-  case 'descLastName':
-    filteredContacts = filteredContacts.sort((a, b) => b.name.split(' ').slice(-1)[0].localeCompare(a.name.split(' ').slice(-1)[0]));
-    break;
-  default:
-    break;
-  }
-
-  if (sort === 'asc') {
-    filteredContacts = filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (sort === 'desc') {
-    filteredContacts = filteredContacts.sort((a, b) => b.name.localeCompare(a.name));
+    case 'ascFirstName':
+      filteredContacts = filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case 'descFirstName':
+      filteredContacts = filteredContacts.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case 'ascLastName':
+      filteredContacts = filteredContacts.sort((a, b) => a.name.split(' ').slice(-1)[0].localeCompare(b.name.split(' ').slice(-1)[0]));
+      break;
+    case 'descLastName':
+      filteredContacts = filteredContacts.sort((a, b) => b.name.split(' ').slice(-1)[0].localeCompare(a.name.split(' ').slice(-1)[0]));
+      break;
+    default:
+      break;
   }
 
   const handleUpdate = () => {
@@ -89,7 +83,7 @@ const ContactList = () => {
           <ModalHeader>Update Contact</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Input placeholder="New Name" value={newName} onChange={(e) => setNewName(e.target.value)} />
+            <Input placeholder="NewName" value={newName} onChange={(e) => setNewName(e.target.value)} />
             <Input placeholder="New Number" value={newNumber} onChange={(e) => setNewNumber(e.target.value)} />
           </ModalBody>
           <ModalFooter>
