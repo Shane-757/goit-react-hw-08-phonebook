@@ -20,10 +20,10 @@ const handleRegister = async (event) => {
       password,
     });
 
-    // Store the token in local storage or another suitable place
+  
     localStorage.setItem('userToken', response.data.token);
 
-    // After successful registration, redirect user to the dashboard
+    
     navigate('/contacts');
   } catch (error) {
    
