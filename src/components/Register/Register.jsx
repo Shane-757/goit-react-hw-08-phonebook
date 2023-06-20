@@ -10,27 +10,30 @@ function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); 
 
-  const handleRegister = async (event) => {
-    event.preventDefault();
+const handleRegister = async (event) => {
+  event.preventDefault();
 
-    try {
-      await axios.post('https://connections-api.herokuapp.com/users/signup', {
-        name,
-        email,
-        password,
-      });
+  try {
+    const response = await axios.post('https://connections-api.herokuapp.com/users/signup', {
+      name,
+      email,
+      password,
+    });
 
-      // After successful registration, redirect user to the login page.
-      navigate('/login');
-    } catch (error) {
-     
-      if (error.response && error.response.status === 400) {
-        setError("This user has already registered."); 
-      } else {
-        console.error("Registration error: ", error);
-      }
+    // Store the token in local storage or another suitable place
+    localStorage.setItem('userToken', response.data.token);
+
+    // After successful registration, redirect user to the dashboard
+    navigate('/contacts');
+  } catch (error) {
+   
+    if (error.response && error.response.status === 400) {
+      setError("This user has already registered."); 
+    } else {
+      console.error("Registration error: ", error);
     }
-  };
+  }
+};
 
   return (
     <Box as="form" onSubmit={handleRegister} width="300px" margin="auto">

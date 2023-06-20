@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact, updateContact } from "Redux/Actions/phonebookActions";
-import { Box, Button, UnorderedList, ListItem, Heading, Center, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Input } from '@chakra-ui/react';
+import { Box, Button, UnorderedList, ListItem, Heading, Center, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Input, Text } from '@chakra-ui/react';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -13,10 +13,27 @@ const ContactList = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
 
-  let filteredContacts = contacts.filter((contact) =>
+ let filteredContacts = contacts.filter((contact) =>
   (contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())) ||
   (contact.number && contact.number.includes(filter))
-);
+  );
+  
+  switch (sort) {
+  case 'ascFirstName':
+    filteredContacts = filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
+    break;
+  case 'descFirstName':
+    filteredContacts = filteredContacts.sort((a, b) => b.name.localeCompare(a.name));
+    break;
+  case 'ascLastName':
+    filteredContacts = filteredContacts.sort((a, b) => a.name.split(' ').slice(-1)[0].localeCompare(b.name.split(' ').slice(-1)[0]));
+    break;
+  case 'descLastName':
+    filteredContacts = filteredContacts.sort((a, b) => b.name.split(' ').slice(-1)[0].localeCompare(a.name.split(' ').slice(-1)[0]));
+    break;
+  default:
+    break;
+  }
 
   if (sort === 'asc') {
     filteredContacts = filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
@@ -24,45 +41,47 @@ const ContactList = () => {
     filteredContacts = filteredContacts.sort((a, b) => b.name.localeCompare(a.name));
   }
 
- const handleUpdate = () => {
-  dispatch(updateContact({id: currentContact.id, name: newName, number: newNumber}));
-  setUpdateModalOpen(false);
-};
+  const handleUpdate = () => {
+    dispatch(updateContact({ id: currentContact.id, name: newName, number: newNumber }));
+    setUpdateModalOpen(false);
+  };
 
   return (
     <Box>
       <Center>
-      {filteredContacts.length > 0 && (
-        <Heading as="h2" size="md" my={4}>Contacts</Heading>
+        {filteredContacts.length > 0 ? (
+          <Heading as="h2" size="md" my={4}>Contacts</Heading>
+        ) : (
+          <Text as="h2" size="md" my={4}>{filter ? 'Contact not found' : 'No contacts stored'}</Text>
         )}
       </Center>
       <Center>
-      <UnorderedList>
-        {filteredContacts.map((contact) => (
-          <ListItem key={contact.id}>
-            {contact.name}: {contact.number}
-            <Button 
-              ml={4}
-              colorScheme="red" 
-              size="xs" 
-              onClick={() => dispatch(deleteContact(contact.id))}
-            >
-              Delete
-            </Button>
-            <Button 
-              ml={4}
-              colorScheme="blue" 
-              size="xs" 
-              onClick={() => {
-                setCurrentContact(contact);
-                setUpdateModalOpen(true);
-              }}
-            >
-              Update
-            </Button>
-          </ListItem>
-        ))}
-      </UnorderedList>
+        <UnorderedList>
+          {filteredContacts.map((contact) => (
+            <ListItem key={contact.id}>
+              {contact.name}: {contact.number}
+              <Button 
+                ml={4}
+                colorScheme="red" 
+                size="xs" 
+                onClick={() => dispatch(deleteContact(contact.id))}
+              >
+                Delete
+              </Button>
+              <Button 
+                ml={4}
+                colorScheme="blue" 
+                size="xs" 
+                onClick={() => {
+                  setCurrentContact(contact);
+                  setUpdateModalOpen(true);
+                }}
+              >
+                Update
+              </Button>
+            </ListItem>
+          ))}
+        </UnorderedList>
       </Center>
       <Modal isOpen={updateModalOpen} onClose={() => setUpdateModalOpen(false)}>
         <ModalOverlay />

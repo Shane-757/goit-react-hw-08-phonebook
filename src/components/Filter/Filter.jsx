@@ -30,12 +30,14 @@ const Filter = () => {
         onChange={handleFilterChange}
         mb={4}
       />
-      <Select value={sort} onChange={handleSortChange}>
-        <option value="asc">Alphabetical</option>
-        <option value="desc">Reverse Alphabetical</option>
-      </Select>
+        <Select value={sort} onChange={handleSortChange}>
+         <option value="ascFirstName">First name A-Z</option>
+         <option value="descFirstName">First name Z-A</option>
+         <option value="ascLastName">Last name A-Z</option>
+         <option value="descLastName">Last name Z-A</option>
+        </Select>
       </Box>
-      </Container>
+    </Container>
   );
 };
 
